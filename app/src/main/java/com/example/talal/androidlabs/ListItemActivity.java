@@ -1,13 +1,14 @@
 package com.example.talal.androidlabs;
 
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
@@ -16,17 +17,18 @@ import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
+ public class ListItemActivity extends AppCompatActivity {
 
-
-
-public class ListItemActivity extends AppCompatActivity {
-
+    static final int REQUEST_IMAGE_CAPTURE = 1;
+    protected static final String ACTIVITY_NAME = "ListItemsActivity";
+    private ImageButton imageButton;
+    private Switch switchSlider;
+    private CheckBox checkbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_item);
-
 
         imageButton = (ImageButton) findViewById(R.id.imageButton);
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -60,19 +62,17 @@ public class ListItemActivity extends AppCompatActivity {
         });
 
         Log.i(ACTIVITY_NAME, "In onCreate()");
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-
     }
 
     private void finishActivityDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ListItemActivity.this);
-        builder.setMessage(R.string.finishActivityMessage).setTitle(R.string.finishActivityMessage);
+        builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent resultintent = new Intent();
-                resultintent.putExtra("Response", "My information to share");
-                setResult(Activity.RESULT_OK, resultintent);
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("Response", "My information to share");
+                setResult(Activity.RESULT_OK, resultIntent);
                 finish();
             }
         });
@@ -83,8 +83,6 @@ public class ListItemActivity extends AppCompatActivity {
         });
         builder.show();
     }
-
-    static final int REQUEST_IMAGE_CAPTURE = 1;
 
     private void launchPhotoApp() {
         Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -105,13 +103,11 @@ public class ListItemActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.i(ACTIVITY_NAME, "In onResume()");
-
     }
 
     protected void onStart() {
         super.onStart();
         Log.i(ACTIVITY_NAME, "In onStart()");
-
     }
 
     protected void onPause() {
@@ -122,19 +118,11 @@ public class ListItemActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         Log.i(ACTIVITY_NAME, "In onStop()");
-
     }
 
     protected void onDestroy() {
         super.onDestroy();
         Log.i(ACTIVITY_NAME, "In onDestroy()");
     }
-
-    protected static final String ACTIVITY_NAME = "ListItemsActivity";
-    private ImageButton imageButton;
-    private Switch switchSlider;
-    private CheckBox checkbox;
-
-
 
 }

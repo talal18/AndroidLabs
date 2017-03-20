@@ -12,19 +12,12 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="420dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/listViewChat" />
+        android:id="@+id/listViewChat"
+        android:layout_above="@+id/sendChat"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/textChat"
-        />
 
     <Button
         android:text="send"
@@ -34,4 +27,12 @@
         android:layout_alignTop="@+id/textChat"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true" />
+    <EditText
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true"
+        android:id="@+id/textChat"
+        android:layout_toLeftOf="@+id/sendChat" />
+
 </RelativeLayout>
