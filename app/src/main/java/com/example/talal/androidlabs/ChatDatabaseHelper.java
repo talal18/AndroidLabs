@@ -11,44 +11,38 @@ import android.util.Log;
 
 public class ChatDatabaseHelper extends SQLiteOpenHelper {
 
+    public static final String TABLE_MESSAGES = "messages";
+    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_MESSAGE = "message";
 
-    public static final String TABLE_NAME = "CHATS";
-    public static String Database_Name = "Chat.db";
-    public static int Version_NUM = 1;
-    public static final String KEY_ID ="_id" ;
-    public static final String KEY_MESSAGE =  "_msg";
+    private static final String DATABASE_NAME = "Chats.db";
+    private static final int VERSION_NUM = 1;
 
+    // Database creation sql statement
+    private static final String DATABASE_CREATE = "create table "
+            + TABLE_MESSAGES + "( " + COLUMN_ID
+            + " integer primary key autoincrement, " + COLUMN_MESSAGE
+            + " text not null);";
 
-    public ChatDatabaseHelper(Context ctx){
-        super(ctx, Database_Name, null, Version_NUM);
+    public ChatDatabaseHelper(Context ctx) {
+        super(ctx, DATABASE_NAME, null, VERSION_NUM);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
         db.execSQL(DATABASE_CREATE);
 
+        Log.i("ChatDatabaseHelper", "Calling onCreate");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-        Log.w(ChatDatabaseHelper.class.getName(), "Upgrading database from version " + oldVersion + " to "
-                + newVersion + ", which will destroy all old data");
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        Log.w(ChatDatabaseHelper.class.getName(),
+                "Upgrading database from version " + oldVersion + " to "
+                        + newVersion + ", which will destroy all old data");
+        db.execSQL("DROP TABLE IF EXISTS messages");
         onCreate(db);
+
+        Log.i("ChatDatabaseHelper", "Calling onUpgrade, oldVersion=" + oldVersion + " newVersion=" + newVersion);
     }
-
-    @Override
-    public void onDowngrade (SQLiteDatabase db, int oldVersion, int newVersion) {
-
-        Log.i(ChatDatabaseHelper.class.getName(), "Downgrading database from version " + newVersion + " to "
-                + oldVersion + ", which will destroy all old data.");
-        db.execSQL("Dropr Table IF EXISTS " + TABLE_NAME);
-        onCreate(db);
-    }
-
-    private static final String DATABASE_CREATE =
-            "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " ( " + KEY_ID  + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            KEY_MESSAGE + " VARCHAR(50));";
 }
