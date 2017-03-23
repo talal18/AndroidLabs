@@ -73,6 +73,7 @@ public class ChatWindow extends AppCompatActivity {
 
                 data.putString("messageText", str.getMessage());
                 data.putString("messageID", Integer.toString(position));
+                data.putString("dataID", Long.toString(id));
 
                 if(!isFrameLoaded) {        // phone
                     Intent intent = new Intent(ChatWindow.this, MessageDetails.class);
@@ -137,9 +138,9 @@ public class ChatWindow extends AppCompatActivity {
 
     }
 
-    public void deleteMessage(int id) {
+    public void deleteMessage(int id, long dataid) {
         database.delete(ChatDatabaseHelper.TABLE_MESSAGES, "_id=?",
-                new String[]{Long.toString(chatArray.get(id).get_id())});
+                new String[]{Long.toString(dataid)});
 
         chatArray.remove(id);
         chatAdapter.notifyDataSetChanged();
@@ -157,9 +158,10 @@ public class ChatWindow extends AppCompatActivity {
         if (resultCode == 5) {
             Bundle extras = data.getExtras();
             int id = Integer.parseInt(extras.getString("id"));
+            long dataid = Long.parseLong(extras.getString("dataID"));
 
             database.delete(ChatDatabaseHelper.TABLE_MESSAGES, "_id=?",
-                    new String[]{Long.toString(chatArray.get(id).get_id())});
+                    new String[]{Long.toString(dataid)});
 
             chatArray.remove(id);
             chatAdapter.notifyDataSetChanged();

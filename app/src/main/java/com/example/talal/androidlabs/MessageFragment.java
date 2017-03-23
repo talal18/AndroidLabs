@@ -27,13 +27,16 @@ public class MessageFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.activity_fragment, container, false);
 
-        Bundle data = this.getArguments();
+        final Bundle data = this.getArguments();
 
         TextView messageText = (TextView)v.findViewById(R.id.messageText);
         final TextView messageID = (TextView)v.findViewById(R.id.messageID);
 
+        final int id = Integer.parseInt(data.getString("messageID"));
+        final long dataid = Long.parseLong(data.getString("dataID"));
+
         messageText.setText(data.getString("messageText"));
-        messageID.setText(data.getString("messageID"));
+        messageID.setText(data.getString("dataID"));
 
         Button deleteMessage = (Button)v.findViewById(R.id.deleteMessage);
         deleteMessage.setOnClickListener(new View.OnClickListener() {
@@ -42,11 +45,12 @@ public class MessageFragment extends Fragment {
 
                 if(deviceType == 0) {
                     Intent i = new Intent();
-                    i.putExtra("id", messageID.getText());
+                    i.putExtra("id", data.getString("messageID"));
+                    i.putExtra("dataID", data.getString("dataID"));
                     getActivity().setResult(5, i);
                     getActivity().finish();
                 } else {
-                    ((ChatWindow)getActivity()).deleteMessage(Integer.parseInt(messageID.getText().toString()));
+                    ((ChatWindow)getActivity()).deleteMessage(id, dataid);
                 }
             }
         });
