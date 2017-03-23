@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item android:id="@+id/action_one"
+        android:title="airport"
+        android:icon="@drawable/airport"
+        android:orderInCategory="101"
+        app:showAsAction="always"
+        />
+
+    <item android:id="@+id/action_two"
+        android:title="Car"
+        android:icon="@drawable/car"
+        android:orderInCategory="101"
+        app:showAsAction="always"
+        />
+
+    <item android:id="@+id/action_three"
+        android:title="Booots"
+        android:icon="@drawable/boots"
+        android:orderInCategory="101"
+        app:showAsAction="always"
+        />
+
+    <item android:id="@+id/action_about"
+        android:title="About"
+        android:orderInCategory="101"
+        />
+</menu>
